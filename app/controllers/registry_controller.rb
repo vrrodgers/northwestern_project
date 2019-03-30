@@ -1,0 +1,2 @@
+class RegistryController < ApplicationController
+end
