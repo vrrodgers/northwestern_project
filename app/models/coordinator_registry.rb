@@ -1,0 +1,2 @@
+class CoordinatorRegistry < ApplicationRecord
+end
