@@ -1,3 +1,4 @@
 Rails.application.routes.draw do
-  resources :registry
+  resources :coordinators
+  resources :registries
 end

@@ -1,0 +1,28 @@
+<%= form_for (coordinator) do |f| %>
+  <% if coordinator.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(coordinator.errors.count, "error") %> prohibited this coordinator from being saved:</h2>
+      <ul>
+      <% coordinator.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+ <div class="form-group">
+    <%= f.text_field :name, class: 'form-control', placeholder: "Name" %>
+  </div>
+
+<div class="form-group">
+    <%= f.email_field :email, class: 'form-control', placeholder: "Email" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.text_field :phone_number, class: 'form-control', placeholder: "Phone Number" %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.submit "Submit", class: 'btn btn-primary' %>
+  </div>
+<% end %>

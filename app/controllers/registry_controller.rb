@@ -1,2 +1,0 @@
-class RegistryController < ApplicationController
-end
