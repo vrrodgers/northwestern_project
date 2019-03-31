@@ -1,0 +1,25 @@
+<%= form_for([@registry, @coordinator_registry]) do |f| %>
+  <% if @coordinator_registry.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@coordinator_registry.errors.count, "error") %> prohibited this coordinator from being saved:</h2>
+
+      <ul>
+      <% @coordinator_registry.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label "Coordinator:"%>
+    <%= f.collection_select :coordinator_id, Coordinator.order(:name),:id,:name, include_blank: true %>
+  </div>
+
+  <%= f.hidden_field :registry_id, :value => @registry.id %>
+
+  <div class="form-group">
+    <%= f.submit "Submit", class: 'btn btn-primary' %>
+  </div>
+<% end %>
+

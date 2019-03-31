@@ -1,8 +1,11 @@
 class RegistriesController < ApplicationController
   before_action :set_registry, only: [:show, :edit, :update, :destroy]
+  before_action :set_toggle_registry, only: [:toggle_status]
 
   def index
     @registries = Registry.all
+    @coordinator_registries = CoordinatorRegistry.new
+
   end
 
   def show
@@ -39,16 +42,29 @@ class RegistriesController < ApplicationController
   def destroy
     @registry.destroy
   end
+
+  def toggle_status
+    if @registry.open?
+      @registry.closed!
+    elsif @registry.closed?
+      @registry.open! 
+    end
+    redirect_to registries_url, notice: 'Registry status has been updated'
+  end
   
   private
     def set_registry
       @registry = Registry.find(params[:id])
+    end
 
+    def set_toggle_registry
+      @registry = Registry.find(params[:registry_id])
     end
 
     def registry_params
       params.require(:registry).permit(:name, 
-                                       :location
+                                       :location,
+                                       :status
                                       )
     end
 

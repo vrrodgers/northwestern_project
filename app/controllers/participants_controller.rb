@@ -17,11 +17,15 @@ class ParticipantsController < ApplicationController
 
   def create
     @participant = Participant.new(participant_params)
-
-    if @participant.save
-      redirect_to @participant, notice: 'Participant was successfully created.' 
+    @verify_new = Participant.where(name: @participant.name).where(gender: @participant.gender).where(date_of_birth: @participant.date_of_birth)
+    if @verify_new.empty?
+      if @participant.save
+        redirect_to @participant, notice: 'Participant was successfully created.' 
+      else
+        render :new 
+      end
     else
-      render :new 
+      redirect_to participants_path, notice: 'Participant already exist.' 
     end
   end
 

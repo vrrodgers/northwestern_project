@@ -14,8 +14,12 @@
     <%= f.text_field :name, class: 'form-control', placeholder: "Name" %>
   </div>
 
-  <div class="form-group">
-    <%= f.text_field :gender, class: 'form-control',  placeholder: "Gender" %>
+   <div class="form-group">
+    <%= f.radio_button :gender, 'male' %>
+    <%= f.label :gender, "Male"%>
+    
+    <%= f.radio_button :gender, 'female' %>
+    <%= f.label :gender, "Female"%>
   </div>
 
   <div class="form-group">

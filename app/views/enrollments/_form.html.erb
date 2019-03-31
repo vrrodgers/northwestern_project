@@ -1,0 +1,44 @@
+<%= form_for([@registry, enrollment]) do |f| %>
+  <% if enrollment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(enrollment.errors.count, "error") %> prohibited this enrollment from being saved:</h2>
+
+      <ul>
+      <% enrollment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label "Participant:"%>
+    <%= f.collection_select :participant_id, Participant.order(:name),:id,:name, include_blank: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label "Coordinator:"%>
+    <%= f.collection_select :coordinator_id, Coordinator.order(:name),:id,:name, include_blank: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label "Perfer Contact Method:"%>
+    <%= f.collection_select :contact_method_id, ContactMethod.order(:name),:id,:name, include_blank: false %>
+  </div>
+
+  <div class="form-group">
+    <%= f.text_field :date_of_enrollment, class: 'form-control datepicker', placeholder: "Date of Enrollment"%>
+  </div>
+
+  <%= f.hidden_field :registry_id, :value => @registry.id %>
+
+  <div class="form-group">
+    <%= f.submit "Submit", class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.datepicker').datepicker();
+  });
+</script>

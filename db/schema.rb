@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_30_015837) do
+ActiveRecord::Schema.define(version: 2019_03_31_144129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,12 +22,12 @@ ActiveRecord::Schema.define(version: 2019_03_30_015837) do
   end
 
   create_table "coordinator_registries", force: :cascade do |t|
-    t.bigint "registries_id"
+    t.bigint "registry_id"
     t.bigint "coordinator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["coordinator_id"], name: "index_coordinator_registries_on_coordinator_id"
-    t.index ["registries_id"], name: "index_coordinator_registries_on_registries_id"
+    t.index ["registry_id"], name: "index_coordinator_registries_on_registry_id"
   end
 
   create_table "coordinators", force: :cascade do |t|
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 2019_03_30_015837) do
     t.bigint "coordinator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 0
     t.index ["contact_method_id"], name: "index_enrollments_on_contact_method_id"
     t.index ["coordinator_id"], name: "index_enrollments_on_coordinator_id"
     t.index ["participant_id"], name: "index_enrollments_on_participant_id"
@@ -69,12 +70,13 @@ ActiveRecord::Schema.define(version: 2019_03_30_015837) do
     t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 0
     t.index ["location"], name: "index_registries_on_location", unique: true
     t.index ["name"], name: "index_registries_on_name", unique: true
   end
 
   add_foreign_key "coordinator_registries", "coordinators"
-  add_foreign_key "coordinator_registries", "registries", column: "registries_id"
+  add_foreign_key "coordinator_registries", "registries"
   add_foreign_key "enrollments", "contact_methods"
   add_foreign_key "enrollments", "coordinators"
   add_foreign_key "enrollments", "participants"
