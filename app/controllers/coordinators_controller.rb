@@ -5,10 +5,6 @@ class CoordinatorsController < ApplicationController
     @coordinators = Coordinator.all
   end
 
-  def show
-
-  end
-
   def new
     @coordinator = Coordinator.new
   end
@@ -17,7 +13,7 @@ class CoordinatorsController < ApplicationController
     @coordinator = Coordinator.new(coordinator_params) 
 
     if @coordinator.save
-      redirect_to coordinator_path(@coordinator), notice: 'Coordinator was successfully created.'
+      redirect_to coordinators_path(@coordinator), notice: 'Coordinator was successfully created.'
     else
       render :new
     end
@@ -28,7 +24,7 @@ class CoordinatorsController < ApplicationController
   def update
     
     if  @coordinator.update(coordinator_params)
-      redirect_to coordinator_path, notice: 'The coordinator was successfully updated.' 
+      redirect_to coordinators_path, notice: 'The coordinator was successfully updated.' 
     else
       render :edit 
     end

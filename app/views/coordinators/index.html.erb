@@ -9,7 +9,6 @@
       <th>Registries</th>
       <th></th>
       <th></th>
-      <th></th>
     </tr>
   </thead>
 
@@ -20,7 +19,6 @@
         <td><%= coordinator.phone_number %></td>
         <td><%= coordinator.email %></td>
         <td><%= coordinator.coordinator_registries.length %></td>
-        <td><%= link_to 'Show', coordinator_path(coordinator) %></td>
         <td><%= link_to 'Edit', edit_coordinator_path(coordinator) %></td>
         <td><%= link_to 'Destroy', coordinator, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

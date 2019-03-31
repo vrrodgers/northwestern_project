@@ -1,11 +1,9 @@
 class ParticipantsController < ApplicationController
-  before_action :set_participant, only: [:show, :edit, :update, :destroy]
+  before_action :set_participant, only: [:edit, :update, :destroy]
 
   def index
     @participants = Participant.all
-  end
-
-  def show
+    @yob = Participant.all.group('date_of_birth').count
   end
 
   def new
@@ -20,7 +18,7 @@ class ParticipantsController < ApplicationController
     @verify_new = Participant.where(name: @participant.name).where(gender: @participant.gender).where(date_of_birth: @participant.date_of_birth)
     if @verify_new.empty?
       if @participant.save
-        redirect_to @participant, notice: 'Participant was successfully created.' 
+        redirect_to participants_path, notice: 'Participant was successfully created.' 
       else
         render :new 
       end
@@ -31,7 +29,7 @@ class ParticipantsController < ApplicationController
 
   def update
     if @participant.update(participant_params)
-      redirect_to @participant, notice: 'Participant was successfully updated.' 
+      redirect_to participants_path, notice: 'Participant was successfully updated.' 
     else
       render :edit 
     end

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :coordinator_registries
-  resources :participants
-  resources :coordinators
+  resources :participants, except: [:show]
+  resources :coordinators, except: [:show]
   resources :registries do
     get :toggle_status
     resources :enrollments
