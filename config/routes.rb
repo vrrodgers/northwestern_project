@@ -1,3 +1,11 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :coordinator_registries
+  resources :participants
+  resources :coordinators
+  resources :registries do
+    get :toggle_status
+    resources :enrollments
+    resources :coordinator_registries, except: [:show, :index] 
+  end
+
 end
