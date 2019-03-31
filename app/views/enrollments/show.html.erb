@@ -1,25 +1,22 @@
 <div>
-<p id="notice"><%= notice %></p>
+    <h2>Participant</h2>
+    Name: <%= @enrollment.participant.name%><br>
+    Enrollment Date: <%= @enrollment.date_of_enrollment.try(:strftime,"%b %d, %Y")%><br>
+    Perfer Method of Contact: <%= @enrollment.contact_method.name%><br>
 
-<h2>Participant</h2>
-Name: <%= @enrollment.participant.name%><br>
-Enrollment Date: <%= @enrollment.date_of_enrollment.try(:strftime,"%b %d, %Y")%><br>
-Perfer Method of Contact: <%= @enrollment.contact_method.name%><br>
+    <h2>Corrdinator</h2>
+    Name: <%= @enrollment.coordinator.name%><br>
+    Remark: <%= @enrollment.remarks%> <%= "No Remarks Saved" if @enrollment.remarks.nil?%>
 
-<h2>Corrdinator</h2>
-Name: <%= @enrollment.coordinator.name%><br>
-Remark: <%= @enrollment.remarks%> <%= "No Remarks Saved" if @enrollment.remarks.nil?%>
-
-<h2>Registry Coordinators</h2>
-<ul>
-    <% @coordinators.each do |record|%>
-        <li> <%= record.coordinator.name%></li>
-    <%end%>
-</ul>
+    <h2>Registry Coordinators</h2>
+    <ul>
+        <% @coordinators.each do |record|%>
+            <li> <%= record.coordinator.name%></li>
+        <%end%>
+    </ul>
 
 
 
-<%= link_to 'Edit', edit_registry_enrollment_path(@registry ,@enrollment) %> |
-<%= link_to 'Back', registry_enrollment_path(@registry)%>
-
+    <%= link_to 'Edit', edit_registry_enrollment_path(@registry ,@enrollment) %> |
+    <%= link_to 'Back', registry_enrollment_path(@registry)%>
 </div>
