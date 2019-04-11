@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to: 'registries#index'  
   resources :coordinator_registries
   resources :participants, except: [:show]
   resources :coordinators, except: [:show]
