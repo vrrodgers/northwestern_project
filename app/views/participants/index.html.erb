@@ -6,6 +6,9 @@
   <li class="nav-item">
     <a class="nav-link" id="yob-tab" data-toggle="tab" href="#yob" role="tab" aria-controls="yob" aria-selected="false">Year of Birth</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" id="by_gender-tab" data-toggle="tab" href="#by_gender" role="tab" aria-controls="by_gender" aria-selected="false">Group by Coordinator & Gender Count</a>
+  </li>
 </ul>
 
 <div class="tab-content" id="myTabContent">
@@ -46,8 +49,9 @@
     <table class="table">
       <thead>
         <tr>
-        <th>Year</th>
-        <th>Count</th>
+        <th>Coordinator</th>
+        <th>Gender</th>
+        <th>Gender Count</th>
         </tr>
       </thead>
 
@@ -65,4 +69,31 @@
 
     <%= link_to 'New Participant', new_participant_path %>
   </div>
+
+  <div class="tab-pane fade" id="by_gender" role="tabpanel" aria-labelledby="by_gender-tab">
+    <table class="table">
+      <thead>
+        <tr>
+        <th>Coordinator</th>
+        <th>Gender</th>
+        <th>Gender Count</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @coordinator_participants_by_gender.each do |record| %>
+          <tr>
+            <td><%= record.coordinator.name.split.map(&:capitalize).join(' ')%></td>
+            <td><%= record.gender.capitalize%></td>
+            <td><%= record.count%></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+
+    <%= link_to 'New Participant', new_participant_path %>
+  </div>
+
 </div>

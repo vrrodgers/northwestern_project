@@ -3,7 +3,10 @@ class ParticipantsController < ApplicationController
 
   def index
     @participants = Participant.all
+    
     @yob = Participant.all.group('date_of_birth').count
+
+    @coordinator_participants_by_gender = Enrollment.search
   end
 
   def new
